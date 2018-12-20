@@ -3,7 +3,7 @@
 
 本项目（nbc-wallet）是与 Newborn Bitcoin（简称 NBC）产品配套的，由官方提供的钱包客户端 APP。NBC 是一个类似于比特币的产品，在 NBC 区块链上发行的币种称为 NBC 币，请访问 http://nb-coin.com 了解更多关于 NBC 的信息。
 
-nbc-wallet 是开源产品，任何人可从 github.com/nomnom-btc/nbc-wallet 下载源码。
+nbc-wallet 是开源产品，任何人可从 github.com/nb-coin/nbc-wallet 下载源码。
 
 &nbsp;
 
@@ -23,7 +23,7 @@ pip install requests
 在 Python 运行环境准备就绪后，请用如下脚本获取 nbc-wallet 项目：
 
 ``` bash
-git clone http://github.com/nomnom-btc/nbc-wallet.git
+git clone http://github.com/nb-coin/nbc-wallet.git
 ```
 
 然后运行本软件：
@@ -214,6 +214,6 @@ nbc-wallet 重用了 [ricmoo/pycoind](https://github.com/ricmoo/pycoind) 项目�
 
 本项目其它源码我们采用 MPL V2 开源协议，详见：[MPL 2.0](http://mozilla.org/MPL/2.0/)
 
-任何问题请在 [github nomnom-btc/nbc-wallet 项目](https://github.com/nomnom-btc/nbc-wallet) 的 Issues 页中提交，谢谢关注本项目！
+任何问题请在 [github nb-coin/nbc-wallet 项目](https://github.com/nb-coin/nbc-wallet) 的 Issues 页中提交，谢谢关注本项目！
 
 &nbsp;
