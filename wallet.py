@@ -547,9 +547,10 @@ def utxo(account, password, num, uock, address):
 @cmd_line.command()
 @click.option('--account','-a',default='',help=_Help.account)
 @click.option('--password','-p',prompt=True,hide_input=True,help=_Help.password)
+@click.option('--after',type=click.INT,default=0,help='from uock (not includes this)')
 @click.option('--hash',default='',help=_Help.trace_state)
 @click.argument('target',nargs=-1)      # account=n account2=n2 ...
-def transfer(account, password, hash, target):
+def transfer(account, password, after, hash, target):
   global app
   addr = read_account_(account,password,True)
   app = WalletApp(addr,vcn=0)
@@ -566,25 +567,32 @@ def transfer(account, password, hash, target):
       if len(b) == 2:
         try:
           targ_addr, f = b[0].strip(), b[1].strip()
-          for ch in targ_addr:
-            if ch not in _BASE58_CHAR:
-              raise Exception('invalid address')
-          f = float(f)
-          if 0 < f <= _TX_TRANSFER_MAX:
-            pay_to.append((targ_addr,f))
-            succ = True
+          if len(targ_addr) > 32:  # base58 addr must large than 32 bytes
+            for ch in targ_addr:
+              if ch not in _BASE58_CHAR:
+                raise Exception('invalid address')
+            f = float(f)
+            if 0 < f <= _TX_TRANSFER_MAX:
+              pay_to.append((targ_addr,f))
+              succ = True
         except: pass
       
       if not succ:
         print('Invalid target: %s' % (item,))
         return
     
-    sn = app.query_sheet(pay_to)
+    if not pay_to:
+      print('warning: pay to nobody')
+      return
+    
+    sn = app.query_sheet(pay_to,from_uocks=[after])
     if sn:
       info = app.submit_info(sn)
-      state = info[1]; txn_hash = info[2]
+      state = info[1]; txn_hash = info[2]; last_uocks = info[3]
       if state == 'submited' and txn_hash:
-        print('\nTransaction state: %s' % (state,))
+        sDesc = '\nTransaction state: %s' % (state,)
+        if last_uocks: sDesc += ', last uock: %s' % (last_uocks[0],)
+        print(sDesc)
         print('Hash: %s' % (hexlify(txn_hash).decode('latin-1'),))
   
   if txn_hash:
@@ -606,9 +614,10 @@ def transfer(account, password, hash, target):
 @click.option('--password','-p',prompt=True,hide_input=True,help=_Help.password)
 @click.option('--proof',default=False,is_flag=True,help='save hash string')
 @click.option('--where','-w',default='0',help='location flag')
+@click.option('--after',type=click.INT,default=0,help='from uock (not includes this)')
 @click.option('--hash',default='',help=_Help.trace_state)
 @click.argument('content',nargs=-1)     # line1 line2
-def record(account, password, proof, where, hash, content):
+def record(account, password, proof, where, after, hash, content):
   global app
   addr = read_account_(account,password,True)
   app = WalletApp(addr,vcn=0)
@@ -618,16 +627,21 @@ def record(account, password, proof, where, hash, content):
   if hash:
     txn_hash = unhexlify(hash)
   else:
+    if not content:
+      print('warning: nothing to record')
+      return
     content = '\n'.join(content)
     
     if proof:
-      sn = app.query_sheet_ex(0,['PROOF',where,content])
-    else: sn = app.query_sheet_ex(0,['MSG',where,content])
+      sn = app.query_sheet_ex(0,['PROOF',where,content],from_uock=after)
+    else: sn = app.query_sheet_ex(0,['MSG',where,content],from_uock=after)
     if sn:
       info = app.submit_info(sn)
-      state = info[1]; txn_hash = info[2]
+      state = info[1]; txn_hash = info[2]; last_uocks = info[3]
       if state == 'submited' and txn_hash:
-        print('\nTransaction state: %s' % (state,))
+        sDesc = '\nTransaction state: %s' % (state,)
+        if last_uocks: sDesc += ', last uock: %s' % (last_uocks[0],)
+        print(sDesc)
         print('Hash: %s' % (hexlify(txn_hash).decode('latin-1'),))
   
   if txn_hash:

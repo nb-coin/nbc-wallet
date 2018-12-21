@@ -168,6 +168,8 @@ python wallet.py transfer 1112pzQBWmUCsLtFZ1oNV769viSdDnAPX45N7Xp3zKvDPJwAL8BJFS
 python wallet.py transfer --hash e11e110060d16c77579d00cb105298c52b228f01664dcd9361ffae82b31cdffa
 ```
 
+成功提交一项交易后，界面将打印动用当前账号中的最后一个 utxo 的 ID 值（即 uock 值），在紧接着的同一账号向外转帐时，可用 `--after uock` 指示从指定位置之后取 UXTO 来转账，这有助于避免同一 UTXO 在两次转账中均被使用。
+
 &nbsp;
 
 ### 10. 使用指南：存证
