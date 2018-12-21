@@ -409,6 +409,7 @@ class GetAccState(Message):
   properties = [
     ('account', format.FtVarString()),
     ('uock', format.FtNumber('q')),
+    ('uock2', format.FtNumber('q')),
   ]
   
   def _debug(self):
