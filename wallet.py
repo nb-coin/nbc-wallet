@@ -386,7 +386,7 @@ class WalletApp(object):
 #=============================
 
 app = None    # for debugging
-WalletApp.WEB_SERVER_ADDR = 'https://api.nb-coin.com'
+WalletApp.WEB_SERVER_ADDR = curr_coin.WEB_SERVER_ADDR
 
 import getpass, shutil, click
 from binascii import hexlify, unhexlify

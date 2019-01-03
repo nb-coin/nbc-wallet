@@ -21,6 +21,7 @@ def decodeHex(s):  # avoid using 'ff'.decode('hex') that not supported in python
 
 class Newborntoken(coin.Coin):
   COINBASE_MATURITY = 8
+  WEB_SERVER_ADDR = 'http://raw0.nb-chain.net'
   
   name    = "newborntoken"
   symbols = ['NBT']         # all symbols

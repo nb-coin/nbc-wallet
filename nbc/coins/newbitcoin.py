@@ -21,6 +21,7 @@ def decodeHex(s):  # avoid using 'ff'.decode('hex') that not supported in python
 
 class Newbitcoin(coin.Coin):
   COINBASE_MATURITY = 8
+  WEB_SERVER_ADDR = 'https://api.nb-coin.com'
   
   name    = "newbitcoin"
   symbols = ['NBC']         # all symbols
