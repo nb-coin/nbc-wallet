@@ -13,6 +13,8 @@ from nbc import wallet
 from nbc import protocol
 from nbc import script
 
+curr_coin = coins.Newbitcoin
+
 def ORD(ch):   # compatible to python3
   return ch if type(ch) == int else ord(ch)
 
@@ -40,7 +42,7 @@ class WalletApp(object):
   
   WEB_SERVER_ADDR = ''
   
-  def __init__(self, wallet, vcn=0, coin=coins.Newbitcoin):
+  def __init__(self, wallet, vcn=0, coin=curr_coin):
     self._wallet = wallet
     self._vcn = vcn
     self._coin = coin

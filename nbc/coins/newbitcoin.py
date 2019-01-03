@@ -35,14 +35,14 @@ class Newbitcoin(coin.Coin):
   raw_seed = ('raw%.pinp.io',20303)    # tcp listen port is 20303
   
   genesis_version = 1
-  genesis_block_hash = decodeHex(b'9488469356089fea9638efa2bb61ab0740b2037178292bdd665933b0d3020000')
-  genesis_merkle_root = decodeHex(b'21a21e382d54c4d455c86df05162c39e244545589023889630ecc09ba2e93bca')
-  genesis_timestamp = 1544614742
-  genesis_bits = 5000
+  genesis_block_hash = decodeHex(b'f84316c0637446c08e31bbc135e74a7f9572b9615bab5d8d52bca03835000000')
+  genesis_merkle_root = decodeHex(b'923615068cea108e04af957754aca4540ee9656d427c76f768f8d8ea8ed308f2')
+  genesis_timestamp = 1546500212
+  genesis_bits = 2500
   genesis_miner = decodeHex(b'd20d21e17681d6a984508f4138592dfa6b592e11e982aaad2af7627440a691d6')
-  genesis_nonce = 244224399
-  genesis_signature = decodeHex(b'3045022014008aeceb52bd81b6ccd863029c5a8971a913cdcecffb5e358b8336d789795202210088a3f0a2698c25442801cda2ea5af9e8a3dcfde39dd62a40b2f21039def59fed00')
+  genesis_nonce = 154234690
+  genesis_signature = decodeHex(b'3046022100870f7223f279e14cccd068e5f55a8ae00eeab32bff38a5db60891303406521860221008d9a682954dc9f2318b6845e5dd01fadb94b8f90c143d7835cf22a9b8437ae8900')
   genesis_txn = protocol.Txn( 1,
       [protocol.TxnIn(protocol.OutPoint(b'\x00'*32,0xffffffff),struct.pack('<BI',4,0),0xffffffff)],
-      [protocol.TxnOut(420000000000000,_PAY2MINER),protocol.TxnOut(0,_PAY2MINER)],
+      [protocol.TxnOut(100000000000000,_PAY2MINER),protocol.TxnOut(0,_PAY2MINER)],
       0xffffffff, b'' ) # genesis block only contains one transaction

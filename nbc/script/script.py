@@ -408,7 +408,7 @@ class Tokenizer(object):  # Tokenizes a script into tokens, The *VERIFY opcodes 
     return ' '.join(output)
 
 class Script(object):
-  def __init__(self, transaction, block_hi, coin=coins.Newbitcoin):
+  def __init__(self, transaction, block_hi, coin):
     self._txn = transaction
     self._block_hi = block_hi
     self._coin = coin

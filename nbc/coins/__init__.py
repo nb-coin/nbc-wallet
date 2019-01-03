@@ -4,11 +4,13 @@
 
 from .coin import satoshi_per_coin
 from .newbitcoin import Newbitcoin
+from .newborntoken import Newborntoken
 
-__all__ = [ 'Newbitcoin', 'satoshi_per_coin' ]
+__all__ = [ 'Newbitcoin', 'Newborntoken', 'satoshi_per_coin' ]
 
 Coins = [
   Newbitcoin,
+  Newborntoken,
 ]
 
 def get_coin(name=None, symbol=None):
